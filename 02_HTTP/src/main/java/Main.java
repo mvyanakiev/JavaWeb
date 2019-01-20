@@ -1,43 +1,85 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.*;
-//import org.apache.commons.codec.binary.Base64;
 
 
 public class Main {
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) throws IOException {
-
-//        String name = "UGVzaG8=";
-//        System.out.println(decode64(name));
-
         List<String> urlList = getValidUrls();
         List<String> request = getRequest();
 
         Map<String, String> headers = getHeaders(request);
-        Map<String, String> params = getBodyParams(request);
+        Map<String, String> params = null;
 
 
+        String forParams = request.get(request.size() - 1);
 
-        String name = headers.get("Authorization").split("\\s+")[1];
-        System.out.println(decode64(name));
+        if (!headers.containsKey("Authorization")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("HTTP/1.1 401 Unauthorized").append(System.lineSeparator());
+            sb.append(returnHeadersDateHost(headers));
+            sb.append("You are not authorized to access the requested functionality.").append(System.lineSeparator());
+            System.out.println(sb.toString());
+        }
 
         if (!urlList.contains(getUrl(request.get(0)))) {
-            System.out.println("The requested functionality was not found.");
+            StringBuilder sb = new StringBuilder();
+            sb.append("HTTP/1.1 404 Not Found").append(System.lineSeparator());
+            sb.append(returnHeadersDateHost(headers));
+            sb.append("The requested functionality was not found.").append(System.lineSeparator());
+            System.out.println(sb.toString());
+        }
+
+        if (forParams.contains("&") && "POST".equals(getMethod(request.get(0)))) {
+            params = getBodyParams(request);
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("HTTP/1.1 400 Bad request").append(System.lineSeparator());
+            sb.append(returnHeadersDateHost(headers));
+            sb.append("There was an error with the requested functionality due to malformed request").append(System.lineSeparator());
+            System.out.println(sb.toString());
         }
 
 
-        if (params.size() == 0) {
-            System.out.println("There was an error with the requested functionality due to malformed request");
+        StringBuilder responseResult = new StringBuilder();
+
+        responseResult.append("HTTP/1.1 200 OK").append(System.lineSeparator());
+        for (Map.Entry<String, String> headerEntry : headers.entrySet()) {
+
+            if (!headerEntry.getKey().equals("Authorization")) {
+                responseResult.append(String.format("%s: %s", headerEntry.getKey(), headerEntry.getValue())).append(System.lineSeparator());
+            }
+        }
+        responseResult.append(System.lineSeparator());
+        String name = decode64(headers.get("Authorization").split("\\s+")[1]);
+
+        responseResult.append(String.format("Greetings %s! You have successfully created " +
+                "%s with quantity – %s, price – %s.", name, params.get("name"), params.get("quantity"), params.get("price")))
+                .append(System.lineSeparator());
+
+        System.out.println(responseResult.toString());
+    }
+
+    private static String returnHeadersDateHost(Map<String, String> headers) {
+        StringBuilder sb = new StringBuilder();
+
+        if (headers.containsKey("Date")) {
+            sb.append(String.format("Date: %s", headers.get("Date"))).append(System.lineSeparator());
+        } else {
+            String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
+            sb.append(String.format("Date: %s", timeStamp)).append(System.lineSeparator());
         }
 
+        if (headers.containsKey("Host")) {
+            sb.append(String.format("Host: %s", headers.get("Host"))).append(System.lineSeparator());
+        }
 
-
-
-
-
+        sb.append(System.lineSeparator());
+        return sb.toString();
     }
 
     private static String decode64(String toDecode) {
@@ -59,6 +101,7 @@ public class Main {
         }
 
         request.add(System.lineSeparator());
+
         if ((line = reader.readLine()) != null && line.length() > 0) {
             request.add(line);
         }
