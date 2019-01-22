@@ -166,9 +166,6 @@ public class Main {
             System.out.println(cookie[0] + " <-> " + cookie[1]);
         }
     }
-
-
-
 }
 
 
