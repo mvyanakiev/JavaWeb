@@ -1,3 +1,6 @@
+import elements.Request;
+import elements.Response;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +18,14 @@ public class Main {
         Map<String, String> headers = getHeaders(request);
         Map<String, String> params = null;
 
+        // todo
+
+//        Request req = new Request(urlList, request);
+//
+//        Response response = new Response(req);
+//
+//        System.out.println(response.toString());
+
 
         String forParams = request.get(request.size() - 1);
 
@@ -24,6 +35,7 @@ public class Main {
             sb.append(returnHeadersDateHost(headers));
             sb.append("You are not authorized to access the requested functionality.").append(System.lineSeparator());
             System.out.println(sb.toString());
+            return;
         }
 
         if (!urlList.contains(getUrl(request.get(0)))) {
@@ -32,6 +44,7 @@ public class Main {
             sb.append(returnHeadersDateHost(headers));
             sb.append("The requested functionality was not found.").append(System.lineSeparator());
             System.out.println(sb.toString());
+            return;
         }
 
         if (forParams.contains("&") && "POST".equals(getMethod(request.get(0)))) {
@@ -42,6 +55,7 @@ public class Main {
             sb.append(returnHeadersDateHost(headers));
             sb.append("There was an error with the requested functionality due to malformed request").append(System.lineSeparator());
             System.out.println(sb.toString());
+            return;
         }
 
 
@@ -63,6 +77,9 @@ public class Main {
 
         System.out.println(responseResult.toString());
     }
+
+
+
 
     private static String returnHeadersDateHost(Map<String, String> headers) {
         StringBuilder sb = new StringBuilder();
