@@ -1,21 +1,12 @@
-package chushka.domain.models.service;
+package chushka.domain.models.view;
 
-public class ProductServiceModel {
+public class ProductDetailsVieweModel {
 
-    private String id;
     private String name;
     private String description;
     private String type;
 
-    public ProductServiceModel() {
-    }
-
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public ProductDetailsVieweModel() {
     }
 
     public String getName() {
