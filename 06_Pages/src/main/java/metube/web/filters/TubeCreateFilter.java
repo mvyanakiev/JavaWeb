@@ -1,7 +1,9 @@
 package metube.web.filters;
 
 import metube.domain.models.binding.TubeCreateBindingModel;
+import metube.util.ValidationUtil;
 
+import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,13 @@ import java.io.IOException;
 
 @WebFilter("/tubes/create")
 public class TubeCreateFilter implements Filter {
+
+    private final ValidationUtil validationUtil;
+
+    @Inject
+    public TubeCreateFilter(ValidationUtil validationUtil) {
+        this.validationUtil = validationUtil;
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -23,14 +32,16 @@ public class TubeCreateFilter implements Filter {
             tubeCreateBindingModel.setYouTubeLink(req.getParameter("youTubeLink"));
             tubeCreateBindingModel.setUploader(req.getParameter("uploader"));
 
+            if (!this.validationUtil.isValid(tubeCreateBindingModel)) {
+                res.sendRedirect("/tubes/create");
+
+                chain.doFilter(req, res);
+                return;
+            }
+
             req.setAttribute("tubeCreateBindingModel", tubeCreateBindingModel);
         }
 
         chain.doFilter(req, res);
-
-
-
-
-
     }
 }

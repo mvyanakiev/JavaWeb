@@ -4,6 +4,7 @@ import metube.domain.entities.Tube;
 import metube.domain.models.service.TubeServiceModel;
 import metube.repository.TubeRepository;
 import metube.util.ModelMapper;
+import metube.util.ValidationUtil;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -13,11 +14,13 @@ public class TubeServiceImpl implements TubeService {
 
     private final TubeRepository tubeRepository;
     private final ModelMapper modelMapper;
+    private final ValidationUtil validationUtil;
 
     @Inject
-    public TubeServiceImpl(TubeRepository tubeRepository, ModelMapper modelMapper) {
+    public TubeServiceImpl(TubeRepository tubeRepository, ModelMapper modelMapper, ValidationUtil validationUtil) {
         this.tubeRepository = tubeRepository;
         this.modelMapper = modelMapper;
+        this.validationUtil = validationUtil;
     }
 
 

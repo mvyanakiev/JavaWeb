@@ -3,6 +3,7 @@ package metube.repository;
 import metube.domain.entities.Tube;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import java.util.List;
 import java.util.Optional;
@@ -19,15 +20,19 @@ public class TubeRepositoryImpl implements TubeRepository {
 
     @Override
     public Optional<Tube> findByName(String name) {
-        Optional<Tube> tube = Optional.of(entityManager
-                .createQuery("" +
-                        "SELECT t " +
-                        "FROM tubes t " +
-                        "WHERE t.name = :name", Tube.class)
-                .setParameter("name", name)
-                .getSingleResult());
+        try {
+            Optional<Tube> tube = Optional.of(entityManager
+                    .createQuery("" +
+                            "SELECT t " +
+                            "FROM tubes t " +
+                            "WHERE t.name = :name", Tube.class)
+                    .setParameter("name", name)
+                    .getSingleResult());
 
-        return tube;
+            return tube;
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -50,14 +55,18 @@ public class TubeRepositoryImpl implements TubeRepository {
 
     @Override
     public Optional<Tube> findById(String id) {
-        Optional<Tube> tube = Optional.of(entityManager
-                .createQuery("" +
-                        "SELECT t " +
-                        "FROM tubes t " +
-                        "WHERE t.id = :id", Tube.class)
-                .setParameter("id", id)
-                .getSingleResult());
+        try {
+            Optional<Tube> tube = Optional.of(entityManager
+                    .createQuery("" +
+                            "SELECT t " +
+                            "FROM tubes t " +
+                            "WHERE t.id = :id", Tube.class)
+                    .setParameter("id", id)
+                    .getSingleResult());
 
-        return tube;
+            return tube;
+        } catch (NoResultException nre) {
+            return Optional.empty();
+        }
     }
 }

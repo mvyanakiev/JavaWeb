@@ -9,8 +9,6 @@
 <% List<AllTubesViewModel> tubes = (List<AllTubesViewModel>) request.getAttribute("allTubes"); %>
 <main>
     <div class="jumbotron">
-
-
         <div class="row">
             <div class="col col-md-12 d-flex justify-content-center">
                 <h1>
@@ -19,7 +17,6 @@
             </div>
         </div>
         <hr/>
-
         <div class="row">
             <div class="col col-md-12 d-flex justify-content-center">
                 <h3>
@@ -28,8 +25,6 @@
             </div>
         </div>
         <hr/>
-
-
         <div class="row">
             <div class="col col-md-12 d-flex justify-content-center">
                 <% if (tubes.size() == 0) { %>
@@ -44,19 +39,13 @@
                 <% } %>
             </div>
         </div>
-
-
         <hr/>
         <div class="row">
             <div class="col col-md-12 d-flex justify-content-center">
                 <a href="/">Back to home</a>
             </div>
         </div>
-
-
     </div>
-
-
 </main>
 <footer>
     <c:import url="templates/footer.jsp"/>
