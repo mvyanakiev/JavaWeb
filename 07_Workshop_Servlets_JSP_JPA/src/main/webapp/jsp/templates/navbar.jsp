@@ -13,9 +13,9 @@
 
             <% if (request.getSession().getAttribute("username") == null) { %>
 
-            <li class="nav-item active col-md-4">
-                <a class="nav-link h5" href="/">Home</a>
-            </li>
+            <%--<li class="nav-item active col-md-4">--%>
+                <%--<a class="nav-link h5" href="/home">Home</a>--%>
+            <%--</li>--%>
             <li class="nav-item active col-md-4">
                 <a class="nav-link h5" href="/login">Login</a>
             </li>
@@ -26,13 +26,13 @@
             <% } else { %>
 
             <li class="nav-item active col-md-3">
-                <a class="nav-link h5" href="/">Home</a>
+                <a class="nav-link h5" href="/home">Home</a>
             </li>
             <li class="nav-item active col-md-3">
                 <a class="nav-link h5" href="/profile">Profile</a>
             </li>
             <li class="nav-item active col-md-3">
-                <a class="nav-link h5" href="/upload-tube">Upload</a>
+                <a class="nav-link h5" href="/tube/upload">Upload</a>
             </li>
             <li class="nav-item active col-md-3">
                 <a class="nav-link h5" href="/logout">Logout</a>

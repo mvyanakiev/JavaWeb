@@ -2,18 +2,17 @@ package metube.repository;
 
 import metube.domain.entities.User;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
 
     private final EntityManager entityManager;
 
-    public UserRepositoryImpl() {
-        this.entityManager = Persistence
-                .createEntityManagerFactory("metube")
-                .createEntityManager();
+    @Inject
+    public UserRepositoryImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override

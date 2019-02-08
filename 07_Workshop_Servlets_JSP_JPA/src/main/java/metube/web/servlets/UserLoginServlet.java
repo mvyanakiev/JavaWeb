@@ -42,10 +42,5 @@ public class UserLoginServlet extends HttpServlet {
         req.getSession().setAttribute("username", userLoginBindingModel.getUsername());
 
         resp.sendRedirect("/home");
-
-
-
-
-
     }
 }

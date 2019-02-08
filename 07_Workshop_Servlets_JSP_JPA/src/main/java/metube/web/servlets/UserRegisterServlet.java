@@ -37,6 +37,7 @@ public class UserRegisterServlet extends HttpServlet {
 
          if(!userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
              req.getRequestDispatcher("/jsp/register.jsp").forward(req, resp);
+             return;
          }
 
          this.userService.registerUser(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
