@@ -27,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> findAll() {
         this.entityManager.getTransaction().begin();
-        List<User> allUsers =  this.entityManager.createQuery("SELECT u FROM User u", User.class)
+        List<User> allUsers = this.entityManager.createQuery("SELECT u FROM User u", User.class)
                 .getResultList();
         this.entityManager.getTransaction().commit();
         return allUsers;
@@ -62,15 +62,11 @@ public class UserRepositoryImpl implements UserRepository {
                     .setParameter("username", username)
                     .setParameter("password", password)
                     .getSingleResult();
-        } catch (Exception e){
+            return user;
+        } catch (Exception e) {
             return null;
+        } finally {
+            this.entityManager.getTransaction().commit();
         }
-
-
-
-        this.entityManager.getTransaction().commit();
-
-
-        return user;
     }
 }
