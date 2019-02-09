@@ -4,6 +4,7 @@ import metube.domain.entities.User;
 import metube.domain.model.service.UserServiceModel;
 import metube.repository.UserRepository;
 import metube.util.ModelMapper;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;
@@ -44,5 +45,16 @@ public class UserServiceImpl implements UserService {
         }
 
         return false;
+    }
+
+    @Override
+    public UserServiceModel findUserByUsername(String username) {
+        User user = this.userRepository.findByUserName(username);
+
+        if (user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return this.modelMapper.map(user, UserServiceModel.class);
     }
 }

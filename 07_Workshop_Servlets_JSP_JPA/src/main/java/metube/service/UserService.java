@@ -8,4 +8,6 @@ public interface UserService {
 
     boolean loginUser(UserServiceModel userServiceModel);
 
+    UserServiceModel findUserByUsername(String username);
+
 }
