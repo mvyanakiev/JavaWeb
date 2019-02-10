@@ -9,4 +9,6 @@ public interface EmployeeService {
     boolean saveEmployee(EmployeeServiceModel employeeServiceModel);
 
     List<EmployeeServiceModel> findAllEmployees();
+
+    boolean removeEmployee(String id);
 }

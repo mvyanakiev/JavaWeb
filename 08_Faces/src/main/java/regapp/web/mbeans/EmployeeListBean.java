@@ -24,7 +24,6 @@ public class EmployeeListBean {
 
     @Inject
     public EmployeeListBean(EmployeeService employeeService, ModelMapper modelMapper) {
-//        this();
         this.employeeService = employeeService;
         this.modelMapper = modelMapper;
         this.employees = this.employeeService.findAllEmployees()

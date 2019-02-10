@@ -6,7 +6,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <meta name="viewport"
@@ -34,25 +35,21 @@
             </tr>
             </thead>
             <tbody>
-            <p:repeat value="#{EmployeeListBean.employees}" var="employee">
-
-
+            <p:repeat value="#{employeeListBean.employees}" var="employee">
                 <tr class="row">
-                    <th scope="row" class="col-md-1">1</th>
-                    <td class="col-md-2">#{employee.}</td>
+                    <th scope="row" class="col-md-1">#{employeeListBean.employees.indexOf(employee) + 1}</th>
+                    <td class="col-md-2">#{employee.firstName}</td>
                     <td class="col-md-2">#{employee.lastName}</td>
                     <td class="col-md-3">#{employee.position}</td>
                     <td class="col-md-1">#{employee.salary}</td>
                     <td class="col-md-1">#{employee.age}</td>
                     <td class="col-md-2">
                         <h:form>
-                            <!--<p:commandButton value="Remove" action="" class="btn btn-danger"/>-->
+                            <p:commandButton value="Remove" action="#{employeeRemoveBean.remove(employee.id)}" class="btn btn-danger"/>
                         </h:form>
                     </td>
                 </tr>
-
             </p:repeat>
-
             </tbody>
         </table>
         <hr style="height: 2px;" class="bg-dark"/>
