@@ -1,4 +1,4 @@
-package regapp.domain.binding;
+package regapp.domain.models.binding;
 
 import java.math.BigDecimal;
 
