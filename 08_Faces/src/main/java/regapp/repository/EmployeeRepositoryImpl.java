@@ -28,11 +28,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public List<Employee> findAll() {
         this.entityManager.getTransaction().begin();
 
-
         List<Employee> employees = this.entityManager
                 .createQuery("SELECT e FROM employees e ", Employee.class)
                 .getResultList();
-
 
         this.entityManager.getTransaction().commit();
 

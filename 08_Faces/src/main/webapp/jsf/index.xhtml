@@ -53,18 +53,33 @@
             </tbody>
         </table>
         <hr style="height: 2px;" class="bg-dark"/>
+
         <h:form class="form">
             <div class="names-holder d-flex justify-content-between">
+
+
                 <div class="form-group w-25">
                     <h:outputLabel for="firstName" value="First Name"/>
-                    <h:inputText value="#{employeeRegisterBean.employeeRegisterBindingModel.firstName}" type="text"
-                                 class="form-control" id="firstName" placeholder="First Name..."/>
+                    <h:inputText value="#{employeeRegisterBean.employeeRegisterBindingModel.firstName}"
+                                 type="text"
+                                 class="form-control"
+                                 id="firstName"
+                                 placeholder="First Name..."/>
                 </div>
+
+
+
                 <div class="form-group w-25">
                     <h:outputLabel for="lasttName" value="Last Name"/>
-                    <h:inputText value="#{employeeRegisterBean.employeeRegisterBindingModel.lastName}" type="text"
-                                 class="form-control" id="lasttName" placeholder="Last Name..."/>
+                    <h:inputText value="#{employeeRegisterBean.employeeRegisterBindingModel.lastName}"
+                                 type="text"
+                                 class="form-control"
+                                 id="lasttName"
+                                 placeholder="Last Name..."/>
                 </div>
+
+
+
                 <div class="form-group w-25">
                     <h:outputLabel for="position" value="Position"/>
                     <h:inputText value="#{employeeRegisterBean.employeeRegisterBindingModel.position}" type="text"
@@ -77,10 +92,17 @@
                     <p:inputNumber value="#{employeeRegisterBean.employeeRegisterBindingModel.salary}"
                                    class="form-control" id="salary" placeholder="Salary..."/>
                 </div>
+
+
+
                 <div class="form-submit-holder d-flex justify-content-center w-25">
                     <h:commandButton action="#{employeeRegisterBean.register}"
                                      class="btn btn-success mt-4 mb-3 mx-auto w-100" value="Register"/>
                 </div>
+
+
+
+
                 <div class="form-group w-25">
                     <h:outputLabel for="age" value="Age"/>
                     <p:inputNumber value="#{employeeRegisterBean.employeeRegisterBindingModel.age}" class="form-control"
@@ -88,10 +110,13 @@
                 </div>
             </div>
         </h:form>
+
+
+
         <hr style="height: 2px;" class="bg-dark"/>
         <div class="d-flex justify-content-between">
-            <h5 class="w-50">Total Money Needed: $16900.00</h5>
-            <h5 class="w-50 text-right">Average Salary: $4225.00</h5>
+            <h5 class="w-50">Total Money Needed: $ #{employeeListBean.totalSalary}</h5>
+            <h5 class="w-50 text-right">Average Salary: $ #{employeeListBean.avgSalary}</h5>
         </div>
         <hr style="height: 2px;" class="bg-dark"/>
     </div>
