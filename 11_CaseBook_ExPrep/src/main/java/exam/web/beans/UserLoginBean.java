@@ -57,7 +57,7 @@ public class UserLoginBean {
                 .getCurrentInstance().getExternalContext().getSession(true);
 
         session.setAttribute("username", userServiceModel.getUsername());
-        session.setAttribute("id", userServiceModel.getId());
+        session.setAttribute("userId", userServiceModel.getId());
 
         FacesContext.getCurrentInstance()
                 .getExternalContext().redirect("/home");

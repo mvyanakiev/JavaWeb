@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class HomeBean {
 
     private List<UserHomeViewModel> models;
+    private String loggedUserId;
 
     private UserService userService;
     private ModelMapper modelMapper;
@@ -30,6 +31,9 @@ public class HomeBean {
     public HomeBean(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.loggedUserId = (String) ((HttpSession) FacesContext.
+                getCurrentInstance().getExternalContext().
+                getSession(false)).getAttribute("userId");
         this.initModels();
     }
 
@@ -46,9 +50,9 @@ public class HomeBean {
                 getCurrentInstance().getExternalContext().
                 getSession(false)).getAttribute("username");
 
-        String loggedUserId = (String) ((HttpSession) FacesContext.
-                getCurrentInstance().getExternalContext().
-                getSession(false)).getAttribute("id");
+//        String loggedUserId = (String) ((HttpSession) FacesContext.
+//                getCurrentInstance().getExternalContext().
+//                getSession(false)).getAttribute("userId");
 
         UserServiceModel loggedInUser = this.userService.getUserById(loggedUserId);
 
@@ -65,9 +69,9 @@ public class HomeBean {
     }
 
     public void addFriend(String id) throws IOException {
-        String loggedUserId = (String) ((HttpSession) FacesContext.
-                getCurrentInstance().getExternalContext().
-                getSession(false)).getAttribute("id");
+//        String loggedUserId = (String) ((HttpSession) FacesContext.
+//                getCurrentInstance().getExternalContext().
+//                getSession(false)).getAttribute("userId");
 
         UserServiceModel loggedInUser = this.userService.getUserById(loggedUserId);
         UserServiceModel userServiceModel = this.userService.getUserById(id);

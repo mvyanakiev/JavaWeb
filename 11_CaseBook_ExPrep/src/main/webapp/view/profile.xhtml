@@ -16,10 +16,12 @@
                     <div class="col-md-6 d-flex flex-column">
                         <c:choose>
                             <c:when test="#{userProfileBean.model.gender == 'Male'}">
-                                <h:graphicImage library="lib" name="img/male.png" class="mx-auto img-thumbnail" width="200" height="200"/>
+                                <h:graphicImage library="lib" name="img/male.png"
+                                                class="mx-auto img-thumbnail" width="200" height="200"/>
                             </c:when>
                             <c:otherwise>
-                                <h:graphicImage library="lib" name="img/female.png" class="mx-auto img-thumbnail" width="200" height="200"/>
+                                <h:graphicImage library="lib" name="img/female.png"
+                                                class="mx-auto img-thumbnail" width="200" height="200"/>
                             </c:otherwise>
                         </c:choose>
                         <h4 class="mx-auto mt-3">#{userProfileBean.model.username}</h4>

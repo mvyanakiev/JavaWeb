@@ -37,9 +37,9 @@ public class UserFriendsBean {
 
         String loggedUserId = (String) ((HttpSession) FacesContext.
                 getCurrentInstance().getExternalContext().
-                getSession(false)).getAttribute("id");
+                getSession(false)).getAttribute("userId");
 
-        UserServiceModel user =  this.modelMapper.map(this.userService.getUserById(loggedUserId), UserServiceModel.class);
+        UserServiceModel user = this.modelMapper.map(this.userService.getUserById(loggedUserId), UserServiceModel.class);
 
         this.models = user.getFriends()
                 .stream()
@@ -47,9 +47,9 @@ public class UserFriendsBean {
                 .collect(Collectors.toList());
     }
 
-    public void removeFriend(String id){
 
-
+    public void removeFriend(String id) {
+        //todo
     }
 
 
