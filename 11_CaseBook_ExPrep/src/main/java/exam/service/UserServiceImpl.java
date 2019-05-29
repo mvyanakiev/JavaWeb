@@ -36,7 +36,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel loginUser(UserServiceModel userServiceModel) {
 
-        User user = this.userRepository.findByUsername(userServiceModel.getUsername());
+
+
+
+
+        // hardcode log
+        // fixme
+        User user = this.userRepository.findByUsername("ani");
+        userServiceModel.setPassword("1");
+
+        // uncomment this to work ok
+//        User user = this.userRepository.findByUsername(userServiceModel.getUsername());
+
+
+
+
+
+
 
         if (user == null || !DigestUtils.sha256Hex(userServiceModel.getPassword()).equals(user.getPassword())) {
             return null;

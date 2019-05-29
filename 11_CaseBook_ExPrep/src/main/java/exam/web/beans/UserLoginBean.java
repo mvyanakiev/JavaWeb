@@ -3,6 +3,7 @@ package exam.web.beans;
 import exam.domain.models.binding.UserLoginBindingModel;
 import exam.domain.models.service.UserServiceModel;
 import exam.service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.modelmapper.ModelMapper;
 
 import javax.enterprise.context.RequestScoped;
@@ -55,6 +56,10 @@ public class UserLoginBean {
 
         HttpSession session = (HttpSession) FacesContext
                 .getCurrentInstance().getExternalContext().getSession(true);
+
+
+
+
 
         session.setAttribute("username", userServiceModel.getUsername());
         session.setAttribute("userId", userServiceModel.getId());

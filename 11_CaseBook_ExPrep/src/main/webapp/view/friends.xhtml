@@ -24,9 +24,12 @@
 
                         <c:forEach items="#{userFriendsBean.models}" var="model">
                             <div class="row d-flex flex-row col-md-5 mb-3 mx-auto">
+
                             <h:link outcome="profile?id=#{model.id}"
                                     class="col-md-6 h5 d-inline-block text-center"
                                     value="#{model.username}"/>
+
+
                             <h:form>
                                 <h:commandButton
                                         action="#{userFriendsBean.removeFriend}"
