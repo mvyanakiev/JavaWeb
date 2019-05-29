@@ -25,7 +25,7 @@ public class TubeServiceImpl implements TubeService {
         tubeServiceModel.setUploader(this.userService.findUserByUsername(tubeServiceModel.getUploader().getUsername()));
 
         try {
-            this.tubeRepository.update(this.modelMapper.map(tubeServiceModel, Tube.class));
+            this.tubeRepository.save(this.modelMapper.map(tubeServiceModel, Tube.class));
         } catch (Exception e) {
             return false;
         }
